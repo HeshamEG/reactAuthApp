@@ -22,6 +22,8 @@ const styles={
         // justifyContent:'flex-start'
 alignItems:'center',
         height:60,
+width:'100%',
+
         paddingTop:15
     },
   textStyle:{
@@ -30,4 +32,4 @@ alignItems:'center',
 };
 
 
-export default Header;
+export  {Header};

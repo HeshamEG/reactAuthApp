@@ -3,23 +3,40 @@
  **/
 // import {React} from 'react';
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import {
-  CardButton
-} from './common/CardSection';
-import {
-  CardSection
-} from './common/CardButton';
+// import {TextInput } from 'react-native';
+import { Input,CardSection, Card, CardButton} from './common';
+
 
 
 class Loginform extends Component {
+  state={emailTextmetext:'',password:''}
+  doLogIn(){
+      alert('clicked')
+  }
   render(){
     return (
         <Card>
-            <CardSection/>
-            <CardSection />
             <CardSection>
-                <CardButton>login!</CardButton>           
+            <Input 
+          value={this.state.userNametext}
+                    placeholder=' ex:user@gmail.com'
+          label="email"
+                    onChangeText={
+                        text => this.setState({ emailTextmetext:text})}
+/>
+            </CardSection >
+            <CardSection>
+                <Input
+                placeholder="password"
+                value={this.state.password}
+                    label="password"
+                    secureTextEntry
+                onChangeText={password=>
+                    this.setState({password})}
+                />
+            </CardSection>
+            <CardSection>
+                <CardButton onPress={this.doLogIn.bind(this)} Children='login'/>           
                  </CardSection>
 
 

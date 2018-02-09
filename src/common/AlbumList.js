@@ -31,4 +31,4 @@ console.log(this.state)
     }
 }
 
-export default AlbumList;
+export  {AlbumList};

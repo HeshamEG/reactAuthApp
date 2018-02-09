@@ -37,4 +37,4 @@ const styles={
 
     }
 }
-export default CardButton;
+export  {CardButton};

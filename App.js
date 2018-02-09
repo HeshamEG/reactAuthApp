@@ -4,6 +4,8 @@ import firebase from 'firebase';
 import TextInputComponent from './src/components/TextInputComponent'
 import LoginButtonComponent from './src/components/LoginButtonComponent'
 import Loginform from './src/Loginform'
+import {Header} from './src/common';
+// import { Icon } from 'react-native-elements'
 
 export default class App extends React.Component {
 //    state={
@@ -26,17 +28,25 @@ componentWillMount(){
   }
   render() {
     return (
-      <View style={styles.container} >
-        <View style={styles.container}>
-        < TextInputComponent  data="userName"/> 
-        < TextInputComponent  data="password"/> 
-</View>
-<View
->
-        <LoginButtonComponent 
-        clickMe={this.doLogIn} data="Login !!"/>
-</View>
-      </View>
+      <View >
+      <Header/>
+        {/* <Icon */}
+          {/* name='sc-telegram' */}
+          {/* type='evilicon' */}
+          {/* color='#517fa4' */}
+        {/* /> */}
+        <Loginform />
+      </View>     
+//       <View style={styles.container} >
+//         <View style={styles.container}>
+//         < TextInputComponent  data="userName"/> 
+//         < TextInputComponent  data="password"/> 
+// </View>
+// <View>
+//         <LoginButtonComponent 
+//         clickMe={this.doLogIn} data="Login !!"/>
+// </View>
+//       </View>
 
 );
   }
@@ -45,9 +55,16 @@ componentWillMount(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'orange',
+    // backgroundColor: 'orange',
     alignItems: 'center',
+
+     justifyContent: 'center',
+  width:'100%'
+  }
+  ,sections:{
+    flex:1,
     justifyContent: 'center',
-  
+        alignItems: 'center',
+
   }
 });
