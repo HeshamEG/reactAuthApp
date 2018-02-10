@@ -4,13 +4,13 @@ import firebase from 'firebase';
 import TextInputComponent from './src/components/TextInputComponent'
 import LoginButtonComponent from './src/components/LoginButtonComponent'
 import Loginform from './src/Loginform'
-import {Header} from './src/common';
+import {Header, CardButton} from './src/common';
 // import { Icon } from 'react-native-elements'
 
 export default class App extends React.Component {
-//    state={
-// userNameText
-//    }
+   state={
+logedIn:null
+   }
 componentWillMount(){
  firebase.initializeApp({
 
@@ -21,34 +21,34 @@ componentWillMount(){
         storageBucket: "glogin-4555f.appspot.com",
         messagingSenderId: "66437944111"
     })
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.setState({ logedIn:true });
+     
+      }else{
+
+         this.setState({ logedIn: false });
+
+      }
+    })
 
   }
-  doLogIn(){
-    // alert({userNameText})
+  renderContent(){
+    if (this.state.logedIn) {
+return (
+  <CardButton></CardButton>
+)
+    } else {
+return(
+<Loginform/>
+);
+    }
   }
   render() {
-    return (
-      <View >
-      <Header/>
-        {/* <Icon */}
-          {/* name='sc-telegram' */}
-          {/* type='evilicon' */}
-          {/* color='#517fa4' */}
-        {/* /> */}
-        <Loginform />
-      </View>     
-//       <View style={styles.container} >
-//         <View style={styles.container}>
-//         < TextInputComponent  data="userName"/> 
-//         < TextInputComponent  data="password"/> 
-// </View>
-// <View>
-//         <LoginButtonComponent 
-//         clickMe={this.doLogIn} data="Login !!"/>
-// </View>
-//       </View>
-
-);
+    return <View>
+        <Header />
+        {this.renderContent()}
+      </View>;
   }
 }
 

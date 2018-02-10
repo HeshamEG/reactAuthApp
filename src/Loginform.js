@@ -3,15 +3,38 @@
  **/
 // import {React} from 'react';
 import React, { Component } from 'react';
-// import {TextInput } from 'react-native';
-import { Input,CardSection, Card, CardButton} from './common';
+import {Text} from 'react-native';
+import { Input,CardSection, Card, CardButton, Spinner} from './common';
 
-
+import firebase from 'firebase';
 
 class Loginform extends Component {
-  state={emailTextmetext:'',password:''}
+  state={loading:false,emailTextmetext:'',password:'',error:''}
   doLogIn(){
-      alert('clicked')
+      const { emailTextmetext, loading, password, error } = this.state;
+      this.setState({ loading: true });
+
+      firebase.auth().signInWithEmailAndPassword
+      (emailTextmetext,password)
+      .then(res=>{
+          this.setState({
+              error: '',
+              loading:true
+          });
+
+           //alert(res)
+      }).catch(e =>{
+this.setState({ error: e.message, loading: false });
+      })
+    //   alert()this.state.emailTextmetext)
+  }
+  renderButton(){
+      if(this.state.loading){
+       return   <Spinner></Spinner>
+      }
+      return <CardSection>
+          <CardButton onPress={this.doLogIn.bind(this)} Children="login" />
+        </CardSection>;
   }
   render(){
     return (
@@ -35,16 +58,16 @@ class Loginform extends Component {
                     this.setState({password})}
                 />
             </CardSection>
-            <CardSection>
-                <CardButton onPress={this.doLogIn.bind(this)} Children='login'/>           
-                 </CardSection>
-
+           <Text style={styles.errorStyle}>{this.state.error}
+           </Text>
+          
+{this.renderButton()}
 
         </Card>
     )
 }
 };
-// const styles = {
+const styles = {
 //     viewStyle: {
 //         width: 50,
 //         backgroundColor: '#052d16',
@@ -56,10 +79,12 @@ class Loginform extends Component {
 //         height: 60,
 //         paddingTop: 15
 //     },
-//     textStyle: {
-//         fontSize: 20
-//     }
-// };
+    errorStyle: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: '#FF2320'
+    }
+};
 
 
 export default Loginform;
